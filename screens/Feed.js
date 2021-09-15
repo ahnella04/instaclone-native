@@ -1,16 +1,45 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
-import { View, Text } from "react-native";
+import { FlatList } from "react-native";
+import ScreenLayout from "../components/ScreenLayout";
+import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "../fragments";
+import Photo from "./Photo";
 
-export default function Feed() {
+const FEED_QUERY = gql`
+  query seeFeed {
+    seeFeed {
+      ...PhotoFragment
+      user {
+        username
+        avatar
+      }
+      caption
+      comments {
+        ...CommentFragment
+      }
+      createdAt
+      isMine
+    }
+  }
+  ${PHOTO_FRAGMENT}
+  ${COMMENT_FRAGMENT}
+`;
+
+export default function Feed({ navigation }) {
+    const { data, loading } = useQuery(FEED_QUERY);
+    const renderPhoto = ({item: photo}) => {
+        return (
+            <Photo {...photo} />
+        )
+    }
     return (
-        <View 
-            style={{ 
-                backgroundColor: "black", 
-                flex: 1, 
-                alignItems: "center", 
-                justifyContent: "center" 
-            }}>
-            <Text style={{ color: "white" }}>Feed</Text>
-        </View>
+        <ScreenLayout loading={loading}>
+            <FlatList
+                style={{ width: "100%" }}
+                data={data?.seeFeed}
+                keyExtractor={photo => "" + photo.id}
+                renderItem={renderPhoto}
+            />
+        </ScreenLayout>
     )
 }

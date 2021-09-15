@@ -6,6 +6,7 @@ import StackNavFactory from "../components/nav/StackNavFactory";
 
 const Tabs = createBottomTabNavigator();
 
+
 export default function LoggedInNav() {
     return (
         <Tabs.Navigator
@@ -19,21 +20,23 @@ export default function LoggedInNav() {
             }}
         >
             <Tabs.Screen 
-                name="Feed" 
+                name="NFeed"
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <TabIcon iconName={"home"} color={color} focused={focused} />
-                    )
+                    ),
+                    headerShown: false
                 }} 
             >
                 {() => <StackNavFactory screenName="Feed" />}
             </Tabs.Screen>
             <Tabs.Screen 
-                name="Search" 
+                name="NSearch"
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <TabIcon iconName={"search"} color={color} focused={focused} />
-                    )
+                    ),
+                    headerShown: false
                 }}     
             >
                 {() => <StackNavFactory screenName="Search" />}
@@ -45,23 +48,26 @@ export default function LoggedInNav() {
                     tabBarIcon: ({ focused, color, size }) => (
                         <TabIcon iconName={"camera"} color={color} focused={focused} />
                     )
-                }}  />
+                }}  
+            />
             <Tabs.Screen 
-                name="Notifications" 
+                name="NNotifications" 
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <TabIcon iconName={"heart"} color={color} focused={focused} />
-                    )
+                    ),
+                    headerShown: false
                 }}     
             >
                 {() => <StackNavFactory screenName="Notifications" />}
             </Tabs.Screen>
             <Tabs.Screen 
-                name="Me"
+                name="NMe"
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <TabIcon iconName={"person"} color={color} focused={focused} />
-                    )
+                    ),
+                    headerShown: false
                 }}
             >
                 {() => <StackNavFactory screenName="Me" />}
