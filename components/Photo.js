@@ -1,6 +1,7 @@
 import React from "react";
 import { useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
+import PropTypes from "prop-types";
 
 const Container = styled.View`
 
@@ -36,7 +37,7 @@ const CaptionText = styled.Text`
     color: white;
 `;
 
-export default function Photo({ id, user, caption, isLiked, likes }) {
+function Photo({ id, user, caption, isLiked, likes }) {
     const { width, height } = useWindowDimensions();
     return (
         <Container>
@@ -73,3 +74,5 @@ Photo.propTypes = {
     likes: PropTypes.number.isRequired,
     commentNumber: PropTypes.number.isRequired,
   };
+
+export default Photo;
